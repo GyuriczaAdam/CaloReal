@@ -11,11 +11,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import hu.adikaindustries.core.R
+import hu.adikaindustries.core.navigation.Route
+import hu.adikaindustries.core.util.UIEvent
 import hu.adikaindustries.core_ui.LocalSpacing
 import hu.adikaindustries.onboarding_presentation.components.ActionButton
 
 @Composable
-fun WelcomeScreen(){
+fun WelcomeScreen(
+    onNavigate: (UIEvent.Navigate)->Unit
+){
     val spacing = LocalSpacing.current
 
     Column(modifier = Modifier.fillMaxSize().padding(spacing.spaceMedium),
@@ -24,7 +28,7 @@ fun WelcomeScreen(){
     ) {
       Text(text = stringResource(id = R.string.welcome_text), textAlign = TextAlign.Center, style = MaterialTheme.typography.h1)
       Spacer(modifier = Modifier.height(spacing.spaceMedium))
-      ActionButton(text = stringResource(id = R.string.next), onClick = { /*TODO*/ }, modifier = Modifier.align(Alignment.CenterHorizontally))
+      ActionButton(text = stringResource(id = R.string.next), onClick = { onNavigate(UIEvent.Navigate(Route.AGE))}, modifier = Modifier.align(Alignment.CenterHorizontally))
 
         
 
