@@ -25,7 +25,7 @@ fun UnitTextField(
         fontSize = 70.sp
     ),
     ){
-     val spacing = LocalSpacing.current
+    val spacing = LocalSpacing.current
 
     Row(
         modifier = modifier,

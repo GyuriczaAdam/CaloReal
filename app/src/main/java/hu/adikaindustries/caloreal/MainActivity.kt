@@ -13,11 +13,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import dagger.hilt.android.AndroidEntryPoint
 import hu.adikaindustries.caloreal.navigation.navigate
 import hu.adikaindustries.caloreal.ui.theme.CaloRealTheme
 import hu.adikaindustries.core.navigation.Route
+import hu.adikaindustries.onboarding_presentation.gender.GenderScreen
 import hu.adikaindustries.onboarding_presentation.welcome.WelcomeScreen
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +35,7 @@ class MainActivity : ComponentActivity() {
 
                     }
                     composable(Route.GENDER){
-
+                        GenderScreen(onNavigate = navController::navigate)
                     }
                     composable(Route.HEIGHT){
 
