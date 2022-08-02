@@ -1,4 +1,4 @@
-package hu.adikaindustries.onboarding_presentation.age
+package hu.adikaindustries.onboarding_presentation.weight
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -8,21 +8,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
 import hu.adikaindustries.core.R
+import hu.adikaindustries.core.domain.model.Gender
 import hu.adikaindustries.core.util.UIEvent
 import hu.adikaindustries.core_ui.LocalSpacing
 import hu.adikaindustries.onboarding_presentation.components.ActionButton
+import hu.adikaindustries.onboarding_presentation.components.SelectableButton
 import hu.adikaindustries.onboarding_presentation.components.UnitTextField
 import kotlinx.coroutines.flow.collect
 
 @Composable
-fun AgeScreen(
+fun WeightScreen(
     scaffoldState: ScaffoldState,
     onNavigate:(UIEvent.Navigate)->Unit,
-    viewModel:AgeViewModel = hiltViewModel()
+    viewModel:WeightViewModel = hiltViewModel()
 ) {
 
     val spacing = LocalSpacing.current
@@ -49,13 +53,13 @@ fun AgeScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = stringResource(id = R.string.whats_your_age),
+            Text(text = stringResource(id = R.string.whats_your_weight),
                 style = MaterialTheme.typography.h3)
             Spacer(modifier = Modifier.height(spacing.spaceMedium))
            UnitTextField(
-               value = viewModel.age,
-               onValueChange = viewModel::onAgeEnter, unit = stringResource(
-               id = R.string.years
+               value = viewModel.weight,
+               onValueChange = viewModel::onWeightEnter, unit = stringResource(
+               id = R.string.kg
            ))
         }
         ActionButton(
