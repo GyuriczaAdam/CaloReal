@@ -16,6 +16,7 @@ import androidx.navigation.compose.rememberNavController
 import hu.adikaindustries.caloreal.navigation.navigate
 import hu.adikaindustries.caloreal.ui.theme.CaloRealTheme
 import hu.adikaindustries.core.navigation.Route
+import hu.adikaindustries.onboarding_presentation.gender.GenderScreen
 import hu.adikaindustries.onboarding_presentation.welcome.WelcomeScreen
 
 class MainActivity : ComponentActivity() {
@@ -32,7 +33,7 @@ class MainActivity : ComponentActivity() {
 
                     }
                     composable(Route.GENDER){
-
+                        GenderScreen(onNavigate = navController::navigate)
                     }
                     composable(Route.HEIGHT){
 
