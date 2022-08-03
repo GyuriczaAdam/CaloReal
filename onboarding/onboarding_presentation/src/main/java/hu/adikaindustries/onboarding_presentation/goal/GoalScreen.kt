@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
 import hu.adikaindustries.core.util.UIEvent
 import hu.adikaindustries.core_ui.LocalSpacing
@@ -47,6 +48,7 @@ fun GoalScreen(
         ) {
             Text(
                 text = stringResource(id = R.string.your_goal),
+                textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.h3
             )
             Spacer(modifier = Modifier.height(spacing.spaceMedium))

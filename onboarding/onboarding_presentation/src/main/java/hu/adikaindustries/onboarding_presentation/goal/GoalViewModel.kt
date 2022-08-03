@@ -33,7 +33,7 @@ class GoalViewModel@Inject constructor(
     fun onNextClick(){
         viewModelScope.launch {
             preferences.saveGoalType((selectedGoal))
-            _uiEvent.send(UIEvent.Navigate(Route.GENDER))
+            _uiEvent.send(UIEvent.Navigate(Route.NUTRIENT_GOAL))
         }
     }
 
