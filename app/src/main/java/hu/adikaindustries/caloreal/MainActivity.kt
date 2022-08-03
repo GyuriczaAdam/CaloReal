@@ -18,6 +18,7 @@ import hu.adikaindustries.core.navigation.Route
 import hu.adikaindustries.onboarding_presentation.activity.ActivityScreen
 import hu.adikaindustries.onboarding_presentation.age.AgeScreen
 import hu.adikaindustries.onboarding_presentation.gender.GenderScreen
+import hu.adikaindustries.onboarding_presentation.goal.GoalScreen
 import hu.adikaindustries.onboarding_presentation.height.HeightScreen
 import hu.adikaindustries.onboarding_presentation.weight.WeightScreen
 import hu.adikaindustries.onboarding_presentation.welcome.WelcomeScreen
@@ -58,7 +59,7 @@ class MainActivity : ComponentActivity() {
                             ActivityScreen(onNavigate = navController::navigate)
                         }
                         composable(Route.GOAL){
-
+                            GoalScreen(onNavigate = navController::navigate)
                         }
                         composable(Route.TRACKER_OVERVIEW){
 

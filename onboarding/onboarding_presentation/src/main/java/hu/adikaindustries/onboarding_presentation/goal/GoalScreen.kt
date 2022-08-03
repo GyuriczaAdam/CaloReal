@@ -1,4 +1,4 @@
-package hu.adikaindustries.onboarding_presentation.activity
+package hu.adikaindustries.onboarding_presentation.goal
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -15,21 +15,22 @@ import hu.adikaindustries.core.util.UIEvent
 import hu.adikaindustries.core_ui.LocalSpacing
 import hu.adikaindustries.core.R
 import hu.adikaindustries.core.domain.model.ActivityLevel
+import hu.adikaindustries.core.domain.model.GoalType
 import hu.adikaindustries.onboarding_presentation.components.ActionButton
 import hu.adikaindustries.onboarding_presentation.components.SelectableButton
 import kotlinx.coroutines.flow.collect
 
 @Composable
-fun ActivityScreen(
+fun GoalScreen(
     onNavigate:(UIEvent.Navigate) ->Unit,
-    viewModel: ActivityViewModel = hiltViewModel()
+    viewModel: GoalViewModel = hiltViewModel()
 ) {
     val spacing = LocalSpacing.current
-    LaunchedEffect(key1 = true){
-        viewModel.uiEvent.collect(){ event->
-            when(event){
-                is UIEvent.Navigate->onNavigate(event)
-                else->Unit
+    LaunchedEffect(key1 = true) {
+        viewModel.uiEvent.collect() { event ->
+            when (event) {
+                is UIEvent.Navigate -> onNavigate(event)
+                else -> Unit
             }
 
         }
@@ -44,31 +45,33 @@ fun ActivityScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = stringResource(id = R.string.whats_your_activity_level),
-                style = MaterialTheme.typography.h3)
+            Text(
+                text = stringResource(id = R.string.your_goal),
+                style = MaterialTheme.typography.h3
+            )
             Spacer(modifier = Modifier.height(spacing.spaceMedium))
             Row {
                 SelectableButton(
-                    text = stringResource(id = R.string.low),
-                    isSelected = viewModel.selectedActivityLevel is ActivityLevel.Low,
+                    text = stringResource(id = R.string.lose),
+                    isSelected = viewModel.selectedGoal is GoalType.LoseWeight,
                     color = MaterialTheme.colors.primaryVariant,
                     selectedTextColor = Color.White,
                     onClick = {
-                        viewModel.onActivityClick(ActivityLevel.Low)
+                        viewModel.onGoalClick(GoalType.LoseWeight)
                     },
                     textStyle = MaterialTheme.typography.button.copy(
                         fontWeight = FontWeight.Normal
                     )
-                    )
+                )
                 Spacer(modifier = Modifier.width(spacing.spaceMedium))
 
                 SelectableButton(
-                    text = stringResource(id = R.string.medium),
-                    isSelected = viewModel.selectedActivityLevel is ActivityLevel.Medium,
+                    text = stringResource(id = R.string.keep),
+                    isSelected = viewModel.selectedGoal is GoalType.KeepWeight,
                     color = MaterialTheme.colors.primaryVariant,
                     selectedTextColor = Color.White,
                     onClick = {
-                        viewModel.onActivityClick(ActivityLevel.Medium)
+                        viewModel.onGoalClick(GoalType.KeepWeight)
                     },
                     textStyle = MaterialTheme.typography.button.copy(
                         fontWeight = FontWeight.Normal
@@ -78,12 +81,12 @@ fun ActivityScreen(
                 Spacer(modifier = Modifier.width(spacing.spaceMedium))
 
                 SelectableButton(
-                    text = stringResource(id = R.string.high),
-                    isSelected = viewModel.selectedActivityLevel is ActivityLevel.High,
+                    text = stringResource(id = R.string.gain),
+                    isSelected = viewModel.selectedGoal is GoalType.GainWeight,
                     color = MaterialTheme.colors.primaryVariant,
                     selectedTextColor = Color.White,
                     onClick = {
-                        viewModel.onActivityClick(ActivityLevel.High)
+                        viewModel.onGoalClick(GoalType.GainWeight)
                     },
                     textStyle = MaterialTheme.typography.button.copy(
                         fontWeight = FontWeight.Normal
@@ -92,8 +95,10 @@ fun ActivityScreen(
             }
         }
         ActionButton(
-            text = stringResource(id =R.string.next),
+            text = stringResource(id = R.string.next),
             onClick = viewModel::onNextClick, modifier = Modifier.align(
-            Alignment.BottomEnd))
+                Alignment.BottomEnd
+            )
+        )
     }
 }
