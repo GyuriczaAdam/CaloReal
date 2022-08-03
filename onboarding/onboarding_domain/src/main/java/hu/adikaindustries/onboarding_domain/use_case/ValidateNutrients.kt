@@ -18,9 +18,10 @@ class ValidateNutrients {
             if(carbsRatio + proteinRatio + fatRatio != 100){
                 return Result.Error(UiText.StringResource(R.string.error_not_100_percent))
             }
-            return Result.Success(carbsRatio / 100f,
-                proteinRatio/ 100f
-                ,fatRatio/100f)
+            return Result.Success(
+                carbsRatio / 100f,
+                proteinRatio/ 100f,
+                   fatRatio/100f)
     }
 
     sealed class Result{

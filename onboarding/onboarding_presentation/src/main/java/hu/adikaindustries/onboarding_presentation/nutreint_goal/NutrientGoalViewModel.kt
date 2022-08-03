@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.adikaindustries.core.domain.preferences.Preferences
 import hu.adikaindustries.core.domain.use_case.FilterOutDigits
+import hu.adikaindustries.core.navigation.Route
 import hu.adikaindustries.core.util.UIEvent
 import hu.adikaindustries.onboarding_domain.use_case.ValidateNutrients
 import kotlinx.coroutines.channels.Channel
@@ -21,7 +22,6 @@ class NutrientGoalViewModel @Inject constructor(
     private val filterOutDigits: FilterOutDigits,
     private val validateNutrients: ValidateNutrients
 ): ViewModel() {
-
     var state by mutableStateOf(NutrientGoalState())
       private set
     private val _uiEvent = Channel<UIEvent>()
@@ -55,7 +55,9 @@ class NutrientGoalViewModel @Inject constructor(
                         preferences.saveCarbRatio(result.carbsRatio)
                         preferences.saveFatRatio(result.fatRatio)
                         preferences.saveProteinRatio(result.proteinRatio)
-
+                        viewModelScope.launch {
+                            _uiEvent.send(UIEvent.Navigate(Route.TRACKER_OVERVIEW))
+                        }
                     }
                     is ValidateNutrients.Result.Error->{
                         viewModelScope.launch {
