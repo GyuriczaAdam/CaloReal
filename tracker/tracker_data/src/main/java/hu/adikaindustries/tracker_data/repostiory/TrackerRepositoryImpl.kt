@@ -2,11 +2,14 @@ package hu.adikaindustries.tracker_data.repostiory
 
 import hu.adikaindustries.tracker_data.local.DAO.TrackerDAO
 import hu.adikaindustries.tracker_data.mapper.toTrackableFood
+import hu.adikaindustries.tracker_data.mapper.toTrackedFood
+import hu.adikaindustries.tracker_data.mapper.toTrackedFoodEntity
 import hu.adikaindustries.tracker_data.remote.OpenFoodApi
 import hu.adikaindustries.tracker_domain.model.TrackableFood
 import hu.adikaindustries.tracker_domain.model.TrackedFood
 import hu.adikaindustries.tracker_domain.repository.TrackerRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import java.time.LocalDate
 
 class TrackerRepositoryImpl(
@@ -34,14 +37,20 @@ class TrackerRepositoryImpl(
     }
 
     override suspend fun insertTrackedFood(food: TrackedFood) {
-        TODO("Not yet implemented")
+        dao.insertTrackedFood(food.toTrackedFoodEntity())
     }
 
     override suspend fun deleteTrackedFood(food: TrackedFood) {
-        TODO("Not yet implemented")
+       dao.deleteTrackedFood(food.toTrackedFoodEntity())
     }
 
     override fun getFoodsForDate(localDate: LocalDate): Flow<List<TrackedFood>> {
-        TODO("Not yet implemented")
+        return dao.getFoodsForDate(
+            day=localDate.dayOfMonth,
+            month = localDate.monthValue,
+            year = localDate.year
+        ).map { entities->
+            entities.map { it.toTrackedFood() }
+        }
     }
 }
