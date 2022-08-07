@@ -1,6 +1,9 @@
 package hu.adikaindustries.tracker_domain.repository
 
 import hu.adikaindustries.tracker_domain.model.TrackableFood
+import hu.adikaindustries.tracker_domain.model.TrackedFood
+import kotlinx.coroutines.flow.Flow
+import java.time.LocalDate
 
 interface TrackerRepository {
     suspend fun searchFood(
@@ -9,5 +12,9 @@ interface TrackerRepository {
         pageSize:Int
     ):Result<List<TrackableFood>>
 
-    suspend fun insertTrackedFood(food:TrackableFood)
+    suspend fun insertTrackedFood(food:TrackedFood)
+
+    suspend fun deleteTrackedFood(food: TrackedFood)
+
+    fun getFoodsForDate(localDate: LocalDate): Flow<List<TrackedFood>>
 }
