@@ -11,7 +11,7 @@ data class Meal(
     val drawableRes:Int,
     val mealType: MealType,
     val carbsAmount:Int = 0,
-    val proteinmount:Int = 0,
+    val proteinAmount:Int = 0,
     val fatAmount:Int = 0,
     val caloriesAmount:Int = 0,
     val isExpanded:Boolean = false

@@ -1,5 +1,6 @@
 package hu.adikaindustries.tracker_presentation.tracker_overview
 
+import hu.adikaindustries.tracker_domain.model.TrackedFood
 import java.time.LocalDate
 
 data class TrackerOverViewState(
@@ -12,5 +13,6 @@ data class TrackerOverViewState(
     val fatGoal:Int=0,
     val caloriesGoal:Int=0,
     val date:LocalDate = LocalDate.now(),
-    val trackedFoods:List<Meal> = defaultMeals
+    val trackedFoods:List<TrackedFood> = emptyList(),
+    val meals:List<Meal> = defaultMeals
 )
