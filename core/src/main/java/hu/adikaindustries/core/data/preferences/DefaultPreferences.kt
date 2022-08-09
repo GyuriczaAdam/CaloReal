@@ -1,4 +1,4 @@
-package hu.adikaindustries.core.domain.data.preferences
+package hu.adikaindustries.core.data.preferences
 
 import android.content.SharedPreferences
 import hu.adikaindustries.core.domain.model.ActivityLevel
@@ -86,5 +86,18 @@ class DefaultPreferences(
             proteinRatio = proteinRatio,
             fatRatio = fatRatio
             )
+    }
+
+    override fun savedShouldShowOnBoarding(shouldShow: Boolean) {
+        sharedPref.edit()
+            .putBoolean(Preferences.KEY_SHOULD_SHOW_ONBORADING,shouldShow)
+            .apply()
+    }
+
+    override fun loadShouldShowOnBorading(): Boolean {
+        return sharedPref.getBoolean(
+            Preferences.KEY_SHOULD_SHOW_ONBORADING,
+            true
+        )
     }
 }
