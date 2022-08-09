@@ -23,6 +23,7 @@ import hu.adikaindustries.onboarding_presentation.height.HeightScreen
 import hu.adikaindustries.onboarding_presentation.nutreint_goal.NutrientGoalScreen
 import hu.adikaindustries.onboarding_presentation.weight.WeightScreen
 import hu.adikaindustries.onboarding_presentation.welcome.WelcomeScreen
+import hu.adikaindustries.tracker_presentation.tracker_overview.TrackerOverViewScreen
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -66,7 +67,7 @@ class MainActivity : ComponentActivity() {
                             NutrientGoalScreen(scaffoldState = scaffoldState, onNavigate = navController::navigate)
                         }
                         composable(Route.TRACKER_OVERVIEW){
-
+                            TrackerOverViewScreen(onNavigate = navController::navigate)
                         }
                         composable(Route.SEARCH){
 
