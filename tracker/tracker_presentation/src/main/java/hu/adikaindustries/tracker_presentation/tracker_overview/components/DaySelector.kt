@@ -4,8 +4,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import hu.adikaindustries.core.R
@@ -15,7 +18,7 @@ import java.time.LocalDate
 
 @Composable
 fun DaySelector(
-    day:LocalDate,
+    date:LocalDate,
     onPreviousDayClick:()->Unit,
     onNextDayClick:()->Unit,
     modifier: Modifier = Modifier
@@ -28,8 +31,12 @@ fun DaySelector(
         IconButton(onClick = onPreviousDayClick) {
             Icon(imageVector = Icons.Default.ArrowBack, contentDescription = stringResource(id = R.string.previous_day))
         }
-
-        
+        Text(
+            text = parseDateText(date = date),
+            style = MaterialTheme.typography.h2,
+        )
+        IconButton(onClick = onNextDayClick) {
+            Icon(imageVector = Icons.Default.ArrowForward, contentDescription = stringResource(id = R.string.next_day))
+        }
     }
-    
 }
