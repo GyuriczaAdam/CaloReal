@@ -1,4 +1,4 @@
-package hu.adikaindustries.caloreal.ui.theme
+package hu.adikaindustries.core_ui
 
 import androidx.compose.ui.graphics.Color
 
