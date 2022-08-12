@@ -49,7 +49,7 @@ fun TrackerOverViewScreen(
                 meal = meal,
                 onToggleClick = {viewModel.onEvent(TrackerOverViewEvent.OnToggleMealClick(meal))},
                 content = {
-
+                    
                 },
                 modifier = Modifier.fillMaxWidth()
                 )
