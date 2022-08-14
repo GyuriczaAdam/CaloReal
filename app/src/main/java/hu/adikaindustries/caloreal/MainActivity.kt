@@ -16,6 +16,7 @@ import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
 import hu.adikaindustries.caloreal.navigation.navigate
 import hu.adikaindustries.caloreal.ui.theme.CaloRealTheme
+import hu.adikaindustries.core.domain.preferences.Preferences
 import hu.adikaindustries.core.navigation.Route
 import hu.adikaindustries.onboarding_presentation.activity.ActivityScreen
 import hu.adikaindustries.onboarding_presentation.age.AgeScreen
@@ -27,11 +28,15 @@ import hu.adikaindustries.onboarding_presentation.weight.WeightScreen
 import hu.adikaindustries.onboarding_presentation.welcome.WelcomeScreen
 import hu.adikaindustries.tracker_presentation.tracker_overview.TrackerOverViewScreen
 import hu.adikaindustries.tracker_presentation.tracker_search.SearchScreen
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @Inject
+    lateinit var preferences: Preferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val shouldShowOnBoarding = preferences.loadShouldShowOnBorading()
         setContent {
             CaloRealTheme {
                 val navController = rememberNavController()
@@ -41,7 +46,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     scaffoldState = scaffoldState
                 ) {
-                    NavHost(navController = navController, startDestination = Route.WELCOME){
+                    NavHost(
+                        navController = navController,
+                        startDestination = if(shouldShowOnBoarding == true){Route.WELCOME}else{Route.TRACKER_OVERVIEW}
+                    ){
                         composable(Route.WELCOME){
                             WelcomeScreen(onNavigate = navController::navigate)
                         }

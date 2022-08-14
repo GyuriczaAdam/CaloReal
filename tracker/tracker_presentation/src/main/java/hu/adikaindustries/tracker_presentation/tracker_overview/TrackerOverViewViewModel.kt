@@ -33,6 +33,7 @@ class TrackerOverViewViewModel @Inject constructor(
 
 
     init {
+        refreshFoods()
         preferences.savedShouldShowOnBoarding(false)
     }
 

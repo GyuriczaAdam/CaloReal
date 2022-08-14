@@ -26,6 +26,7 @@ import hu.adikaindustries.core.R
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import hu.adikaindustries.core_ui.LocalSpacing
 
@@ -55,6 +56,7 @@ fun SearchTextField(
             ),
             keyboardOptions = KeyboardOptions(
                 imeAction = ImeAction.Search
+
             ),
             modifier = Modifier
                 .clip(RoundedCornerShape(5.dp))

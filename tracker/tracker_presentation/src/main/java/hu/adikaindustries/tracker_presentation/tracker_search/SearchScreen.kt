@@ -73,6 +73,7 @@ fun SearchScreen(
             onValueChange = {
                             viewModel.onEvent(TrackerSearchEvent.OnQueryChange(it))
             },
+            shouldShowHint = state.isHintVisible,
             onSearch = {
                         keyBoardController?.hide()
                        viewModel.onEvent(TrackerSearchEvent.OnSearch)
