@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import hu.adikaindustries.core.R
 import androidx.compose.ui.platform.LocalContext
@@ -12,6 +13,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import hu.adikaindustries.core.util.UIEvent
 import hu.adikaindustries.core_ui.LocalSpacing
 import hu.adikaindustries.tracker_presentation.tracker_overview.components.*
+import kotlinx.coroutines.flow.collect
 
 @Composable
 fun TrackerOverViewScreen(
@@ -21,6 +23,14 @@ fun TrackerOverViewScreen(
     val spacing = LocalSpacing.current
     val state = viewModel.state
     val context = LocalContext.current
+    LaunchedEffect(key1 = context){
+        viewModel.uiEvent.collect{event->
+            when(event){
+                is UIEvent.Navigate->onNavigate(event)
+                else ->Unit
+            }
+        }
+    }
     
     LazyColumn(
         modifier = Modifier

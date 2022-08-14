@@ -103,7 +103,6 @@ class SearchViewModel @Inject constructor(
                 date = event.date
             )
             _uiEvent.send(UIEvent.NavigateUp)
-
         }
     }
 }
