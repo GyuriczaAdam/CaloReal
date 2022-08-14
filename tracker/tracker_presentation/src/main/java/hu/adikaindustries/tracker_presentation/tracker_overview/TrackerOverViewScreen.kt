@@ -13,24 +13,16 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import hu.adikaindustries.core.util.UIEvent
 import hu.adikaindustries.core_ui.LocalSpacing
 import hu.adikaindustries.tracker_presentation.tracker_overview.components.*
-import kotlinx.coroutines.flow.collect
 
 @Composable
 fun TrackerOverViewScreen(
-    onNavigate: (UIEvent.Navigate) -> Unit,
+    onNavigateToSearch: (String,Int,Int,Int) -> Unit,
     viewModel: TrackerOverViewViewModel = hiltViewModel()
 ) {
     val spacing = LocalSpacing.current
     val state = viewModel.state
     val context = LocalContext.current
-    LaunchedEffect(key1 = context){
-        viewModel.uiEvent.collect{event->
-            when(event){
-                is UIEvent.Navigate->onNavigate(event)
-                else ->Unit
-            }
-        }
-    }
+
     
     LazyColumn(
         modifier = Modifier
@@ -70,7 +62,12 @@ fun TrackerOverViewScreen(
                         AddButton(text = stringResource(id = R.string.add_meal,
                                                         meal.name.asString(context)
                             ), onClick = {
-                                viewModel.onEvent(TrackerOverViewEvent.OnAddFoodClick(meal))
+                                onNavigateToSearch(
+                                    meal.name.asString(context),
+                                    state.date.dayOfMonth,
+                                    state.date.monthValue,
+                                    state.date.year
+                                )
                         },
                         modifier = Modifier.fillMaxWidth()
                             )

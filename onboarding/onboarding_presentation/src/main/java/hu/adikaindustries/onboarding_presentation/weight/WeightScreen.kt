@@ -8,39 +8,33 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
 import hu.adikaindustries.core.R
-import hu.adikaindustries.core.domain.model.Gender
 import hu.adikaindustries.core.util.UIEvent
 import hu.adikaindustries.core_ui.LocalSpacing
 import hu.adikaindustries.onboarding_presentation.components.ActionButton
-import hu.adikaindustries.onboarding_presentation.components.SelectableButton
 import hu.adikaindustries.onboarding_presentation.components.UnitTextField
 import kotlinx.coroutines.flow.collect
 
 @Composable
 fun WeightScreen(
     scaffoldState: ScaffoldState,
-    onNavigate:(UIEvent.Navigate)->Unit,
+    onNextClick:()->Unit,
     viewModel:WeightViewModel = hiltViewModel()
 ) {
-
     val spacing = LocalSpacing.current
     val context = LocalContext.current
     LaunchedEffect(key1 = true){
         viewModel.uiEvent.collect(){ event->
             when(event){
-                is UIEvent.Navigate->onNavigate(event)
+                is UIEvent.Success->onNextClick()
                 is UIEvent.ShowSnackBar->{
                     scaffoldState.snackbarHostState.showSnackbar(message = event.message.asString(context))
                 }
                 else->Unit
             }
-
         }
     }
     Box(

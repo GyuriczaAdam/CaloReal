@@ -7,9 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.adikaindustries.core.domain.model.ActivityLevel
-import hu.adikaindustries.core.domain.model.Gender
 import hu.adikaindustries.core.domain.preferences.Preferences
-import hu.adikaindustries.core.navigation.Route
 import hu.adikaindustries.core.util.UIEvent
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -33,7 +31,7 @@ class ActivityViewModel @Inject constructor(
     fun onNextClick(){
         viewModelScope.launch {
             preferences.saveActivityLevel(selectedActivityLevel)
-            _uiEvent.send(UIEvent.Navigate(Route.GOAL))
+            _uiEvent.send(UIEvent.Success)
         }
     }
 
