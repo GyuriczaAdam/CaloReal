@@ -7,14 +7,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.adikaindustries.core.domain.preferences.Preferences
-import hu.adikaindustries.core.navigation.Route
-import hu.adikaindustries.core.util.UIEvent
 import hu.adikaindustries.tracker_domain.use_case.TrackerUseCases
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,12 +21,7 @@ class TrackerOverViewViewModel @Inject constructor(
 ):ViewModel(){
     var state by mutableStateOf(TrackerOverViewState())
         private set
-
-    private val _uiEvent= Channel<UIEvent>()
-    val uiEvent = _uiEvent.receiveAsFlow()
-
     private var getFoodsForDateJob:Job ? = null
-
 
     init {
         refreshFoods()
@@ -39,18 +30,7 @@ class TrackerOverViewViewModel @Inject constructor(
 
     fun onEvent(event: TrackerOverViewEvent){
         when(event){
-            is TrackerOverViewEvent.OnAddFoodClick->{
-                viewModelScope.launch {
-                    _uiEvent.send(
-                        UIEvent.Navigate(
-                            route = Route.SEARCH +"/${event.meal.mealType.name}"+
-                                    "/${state.date.dayOfMonth}"+
-                                    "/${state.date.monthValue}"+
-                                    "/${state.date.year}"
-                        )
-                    )
-                }
-            }
+
             is TrackerOverViewEvent.OnDeleteTrackedFoodClick->{
                 viewModelScope.launch {
                     trackerUseCases.deleteTrackedFood(event.trackedFood)

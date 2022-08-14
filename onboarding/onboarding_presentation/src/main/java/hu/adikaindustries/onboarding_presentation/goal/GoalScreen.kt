@@ -15,7 +15,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import hu.adikaindustries.core.util.UIEvent
 import hu.adikaindustries.core_ui.LocalSpacing
 import hu.adikaindustries.core.R
-import hu.adikaindustries.core.domain.model.ActivityLevel
 import hu.adikaindustries.core.domain.model.GoalType
 import hu.adikaindustries.onboarding_presentation.components.ActionButton
 import hu.adikaindustries.onboarding_presentation.components.SelectableButton
@@ -23,14 +22,14 @@ import kotlinx.coroutines.flow.collect
 
 @Composable
 fun GoalScreen(
-    onNavigate:(UIEvent.Navigate) ->Unit,
+    onNextClick:() ->Unit,
     viewModel: GoalViewModel = hiltViewModel()
 ) {
     val spacing = LocalSpacing.current
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect() { event ->
             when (event) {
-                is UIEvent.Navigate -> onNavigate(event)
+                is UIEvent.Success -> onNextClick()
                 else -> Unit
             }
 

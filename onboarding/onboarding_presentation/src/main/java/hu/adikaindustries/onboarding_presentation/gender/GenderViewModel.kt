@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.adikaindustries.core.domain.model.Gender
 import hu.adikaindustries.core.domain.preferences.Preferences
-import hu.adikaindustries.core.navigation.Route
 import hu.adikaindustries.core.util.UIEvent
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -32,7 +31,7 @@ class GenderViewModel @Inject constructor(
     fun onNextClick(){
         viewModelScope.launch {
             preferences.saveGender(selectedGender)
-            _uiEvent.send(UIEvent.Navigate(Route.AGE))
+            _uiEvent.send(UIEvent.Success)
         }
     }
 

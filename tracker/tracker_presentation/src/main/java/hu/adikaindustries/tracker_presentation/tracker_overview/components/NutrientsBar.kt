@@ -24,6 +24,7 @@ fun NutrientsBar(
 ){
     val background = MaterialTheme.colors.background
     val caloriesExceedColor = MaterialTheme.colors.error
+
     val carbWidthRatio = remember {
         Animatable(0f)
     }

@@ -1,4 +1,4 @@
-package hu.adikaindustries.core.navigation
+package hu.adikaindustries.caloreal.navigation
 
 object Route {
     const val WELCOME="welcome"

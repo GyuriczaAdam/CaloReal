@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import hu.adikaindustries.core.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.adikaindustries.core.domain.preferences.Preferences
-import hu.adikaindustries.core.navigation.Route
 import hu.adikaindustries.core.util.UIEvent
 import hu.adikaindustries.core.util.UiText
 import kotlinx.coroutines.channels.Channel
@@ -41,7 +40,7 @@ class WeightViewModel @Inject constructor(
                 return@launch
             }
             preferences.saveWeight(weightNumber)
-            _uiEvent.send(UIEvent.Navigate(Route.ACTIVITY))
+            _uiEvent.send(UIEvent.Success)
         }
     }
 }
