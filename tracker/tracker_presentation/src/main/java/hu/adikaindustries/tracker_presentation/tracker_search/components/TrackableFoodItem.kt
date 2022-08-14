@@ -155,7 +155,7 @@ fun TrackableFoodItem(
                             .border(
                                 shape = RoundedCornerShape(5.dp),
                                 width = 0.5.dp,
-                                color = MaterialTheme.colors.surface
+                                color = MaterialTheme.colors.onSurface
                             )
                             .alignBy(LastBaseline)
                             .padding(spacing.spaceMedium)
