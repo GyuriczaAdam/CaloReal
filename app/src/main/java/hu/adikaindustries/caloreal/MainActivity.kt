@@ -12,9 +12,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
+import hu.adikaindustries.caloreal.navigation.Route
 import hu.adikaindustries.caloreal.ui.theme.CaloRealTheme
 import hu.adikaindustries.core.domain.preferences.Preferences
-import hu.adikaindustries.caloreal.navigation.navigation.Route
 import hu.adikaindustries.onboarding_presentation.activity.ActivityScreen
 import hu.adikaindustries.onboarding_presentation.age.AgeScreen
 import hu.adikaindustries.onboarding_presentation.gender.GenderScreen
